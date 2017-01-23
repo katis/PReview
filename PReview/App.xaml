@@ -1,0 +1,9 @@
+﻿<Application x:Class="PReview.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:PReview"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <BitmapImage x:Key="GithubLogo" UriSource="github-512.png" />
+    </Application.Resources>
+</Application>
