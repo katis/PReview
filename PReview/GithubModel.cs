@@ -1,6 +1,7 @@
 ﻿using Octokit;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,12 +46,16 @@ namespace PReview
                     var issue = prIssues[pr.Number];
                     var comments = await github.Issue.Comment.GetAllForIssue(config.Organization, config.Repository, issue.Number);
 
-                    var okCount = comments
+                    var thumbComments = comments
                         .Where(c => c.CreatedAt > lastModification)
                         .Where(c => c.Body.Contains(":+1:"))
-                        .Count();
+                        .ToList();
 
-                    return okCount < 2 ? pr : null;
+                    var okCount = thumbComments.Count;
+
+                    var isCommentedByYou = thumbComments.Any(c => config.UserName == c.User.Login);
+
+                    return !isCommentedByYou && okCount < 2 ? pr : null;
                 })
                 .WhenAll())
                 .Where(pr => pr != null);

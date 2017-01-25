@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace PReview
@@ -34,6 +35,8 @@ namespace PReview
         public string Repository { get; private set; } = "";
         [JsonProperty]
         public string ApiToken { get; private set; } = "";
+        [JsonProperty]
+        public string UserName { get; private set; } = "";
 
         public void Write(string path)
         {
